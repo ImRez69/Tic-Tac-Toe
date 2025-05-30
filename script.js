@@ -17,7 +17,8 @@ const onClickBox = (e) => {
   const boxCheck = e.target.closest(".box"); // If .box is exited True else is False
 
   if (boxCheck) {
-    if (currentPlayer === "X") { // Player Turn
+    if (currentPlayer === "X") {
+      // Player Turn
       currentPlayer = "O";
     } else {
       currentPlayer = "X";
@@ -35,5 +36,12 @@ const onClickBox = (e) => {
 
     boxCheck.classList = "box-active";
   }
-}; 
+
+  // function checkStatus() {
+  //   const isBoardFull = !board.includes(' "" ');
+  //   if (isBoardFull) {
+  //     console.log("Game is Equal");
+  //   }
+  // }
+};
 article.addEventListener("click", onClickBox);
