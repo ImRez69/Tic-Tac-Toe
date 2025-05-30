@@ -37,11 +37,6 @@ const onClickBox = (e) => {
     boxCheck.classList = "box-active";
   }
 
-  // function checkStatus() {
-  //   const isBoardFull = !board.includes(' "" ');
-  //   if (isBoardFull) {
-  //     console.log("Game is Equal");
-  //   }
-  // }
+
 };
 article.addEventListener("click", onClickBox);
