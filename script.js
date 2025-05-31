@@ -2,7 +2,6 @@
 const button = document.getElementById("btn");
 const body = document.getElementById("body");
 const svg = document.querySelectorAll("svg");
-
 const onClick = () => {
   body.classList.toggle("light"); // Toggle light for body
   svg.forEach((svg) => svg.classList.toggle("light-svg")); // Toggle light-svg for all svg
@@ -14,22 +13,21 @@ let currentPlayer = "X";
 let turnCount = 0;
 let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 const winningConditions = [
-  [0, 1, 2], // ردیف اول
-  [3, 4, 5], // ردیف دوم
-  [6, 7, 8], // ردیف سوم
-  [0, 3, 6], // ستون اول
-  [1, 4, 7], // ستون دوم
-  [2, 5, 8], // ستون سوم
-  [0, 4, 8], // قطر اصلی
-  [2, 4, 6], // قطر فرعی
+    [0, 1, 2], // First Row
+    [3, 4, 5], // Second Row
+    [6, 7, 8], // Third Row
+    [0, 3, 6], // First Column
+    [1, 4, 7], // Second Column
+    [2, 5, 8], // Third Column
+    [0, 4, 8], // Main Diagonal
+    [2, 4, 6], // Anti-Diagonal
 ];
 
+// Current Player Element
 const currentPlayerElement = document.createElement("h2");
-const nodeText = document.createTextNode("Current Player: X");
-currentPlayerElement.appendChild(nodeText);
-currentPlayerElement.id ="current-player";
 document.getElementById("h1").appendChild(currentPlayerElement);
-const h2 = document.getElementById("current-player")
+currentPlayerElement.id = "current-player"
+currentPlayerElement.textContent ="Current Player: X";
 
 // Game Status Function
 function checkGameStatus() {
@@ -59,7 +57,9 @@ function checkGameStatus() {
     ticTacToe.innerText = `${currentPlayer} Won`;
     console.log(board);
     article.removeEventListener("click", onClickBox);
-  } else if (turnCount === 9 && roundWon === false) {
+  }
+  // Draw Conditions
+  if (turnCount === 9 && roundWon === false) {
     ticTacToe.innerText = "Draw";
     article.removeEventListener("click", onClickBox);
   }
@@ -78,10 +78,10 @@ const onClickBox = (e) => {
       // Player Turn
       turnCount++;
       currentPlayer = "X";
-      h2.innerText = "Current Player: O"
+      document.getElementById("current-player").innerText = "Current Player: O";
     } else {
       currentPlayer = "O";
-      h2.innerText = "Current Player: X"
+      document.getElementById("current-player").innerText = "Current Player: X";
       turnCount++;
     }
 
@@ -99,6 +99,5 @@ const onClickBox = (e) => {
     boxCheck.classList = "box-active";
     checkGameStatus();
   }
-
 };
 article.addEventListener("click", onClickBox);
