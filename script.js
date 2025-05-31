@@ -11,7 +11,8 @@ button.addEventListener("click", onClick);
 
 // Tic Tac Toe Rule
 let currentPlayer;
-
+let turnCount = 0;
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 const winningConditions = [
   [0, 1, 2], // ردیف اول
   [3, 4, 5], // ردیف دوم
@@ -23,21 +24,49 @@ const winningConditions = [
   [2, 4, 6], // قطر فرعی
 ];
 
-let board = [
-  ["", "", ""], // ردیف اول
-  ["", "", ""], // ردیف دوم
-  ["", "", ""], // ردیف سوم
-];
+// Game Status Function
+function checkGameStatus() {
+  // Winning Conditions
+  const ticTacToe = document.getElementById("h1");
+  let roundWon = false;
+  for (let i = 0; winningConditions.length > i; i++) {
+    condition = winningConditions[i];
+    const indexA = condition[0];
+    const indexB = condition[1];
+    const indexC = condition[2];
 
-let turnCount = 0;
+    const boxA = board[indexA];
+    const boxB = board[indexB];
+    const boxC = board[indexC];
+
+    switch (true) {
+      case boxA === " " || boxB === " " || boxC === " ":
+        continue;
+
+      case boxA === boxB && boxB === boxC:
+        roundWon = true;
+        break;
+    }
+  }
+  if (roundWon) {
+    ticTacToe.innerText = `${currentPlayer} Won`;
+    console.log(board);
+    article.removeEventListener("click", onClickBox);
+  } else if (turnCount === 9 && roundWon === false) {
+    ticTacToe.innerText = "Draw";
+    article.removeEventListener("click", onClickBox);
+  }
+}
 
 // Box Action
 const article = document.getElementById("article");
-
 const onClickBox = (e) => {
   const boxCheck = e.target.closest(".box"); // If .box is exited True else is False
 
   if (boxCheck) {
+    const boxId = boxCheck.id;
+    const boxIndex = boxId.replace("box", "") - 1; // Changes the boxIndex by one unit to fix index 0 and push X to board
+
     if (turnCount % 2 == 0) {
       // Player Turn
       turnCount++;
@@ -50,14 +79,16 @@ const onClickBox = (e) => {
     switch (currentPlayer) {
       case "X":
         boxCheck.querySelector(".x-svg").classList.add("show");
+        board[boxIndex] = "X";
         break;
 
       case "O":
         boxCheck.querySelector(".o-svg").classList.add("show");
+        board[boxIndex] = "O";
         break;
     }
     boxCheck.classList = "box-active";
+    checkGameStatus();
   }
-
 };
 article.addEventListener("click", onClickBox);
