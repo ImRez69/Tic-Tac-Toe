@@ -1,3 +1,7 @@
+:root {
+  --vazir-font: Vazirmatn;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,10 +36,19 @@ body {
 #btn {
   margin: 16px auto;
   width: 80%;
+  font-family: var(--vazir-font);
+  border-radius: 8px;
 }
 
 .title {
+  font-family: var(--vazir-font);
   padding: 10px 0;
+}
+
+#current-player {
+  font-family: var(--vazir-font);
+  text-align: center;
+  font-size: 18px;
 }
 
 .article {

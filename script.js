@@ -10,7 +10,7 @@ const onClick = () => {
 button.addEventListener("click", onClick);
 
 // Tic Tac Toe Rule
-let currentPlayer;
+let currentPlayer = "X";
 let turnCount = 0;
 let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 const winningConditions = [
@@ -23,6 +23,13 @@ const winningConditions = [
   [0, 4, 8], // قطر اصلی
   [2, 4, 6], // قطر فرعی
 ];
+
+const currentPlayerElement = document.createElement("h2");
+const nodeText = document.createTextNode("Current Player: X");
+currentPlayerElement.appendChild(nodeText);
+currentPlayerElement.id ="current-player";
+document.getElementById("h1").appendChild(currentPlayerElement);
+const h2 = document.getElementById("current-player")
 
 // Game Status Function
 function checkGameStatus() {
@@ -71,8 +78,10 @@ const onClickBox = (e) => {
       // Player Turn
       turnCount++;
       currentPlayer = "X";
+      h2.innerText = "Current Player: O"
     } else {
       currentPlayer = "O";
+      h2.innerText = "Current Player: X"
       turnCount++;
     }
 
@@ -90,5 +99,6 @@ const onClickBox = (e) => {
     boxCheck.classList = "box-active";
     checkGameStatus();
   }
+
 };
 article.addEventListener("click", onClickBox);
