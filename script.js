@@ -4,7 +4,7 @@ const body = document.getElementById("body");
 const svg = document.querySelectorAll("svg");
 
 const onClick = () => {
-  body.classList.toggle("light");
+  body.classList.toggle("light"); // Toggle light for body
   svg.forEach((svg) => svg.classList.toggle("light-svg")); // Toggle light-svg for all svg
 };
 button.addEventListener("click", onClick);
