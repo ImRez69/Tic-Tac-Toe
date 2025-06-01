@@ -1,33 +1,34 @@
-// Button Action
+// Light Mode Button Action
 const button = document.getElementById("btn");
 const body = document.getElementById("body");
 const svg = document.querySelectorAll("svg");
 const onClick = () => {
-  body.classList.toggle("light"); // Toggle light for body
-  svg.forEach((svg) => svg.classList.toggle("light-svg")); // Toggle light-svg for all svg
+  body.classList.toggle("light"); // اضافه کردن کلس به بادی
+  svg.forEach((svg) => svg.classList.toggle("light-svg")); // اضافه کردن کلس به همه اس وی جا ها
 };
 button.addEventListener("click", onClick);
 
 // Tic Tac Toe Rule
-let currentPlayer = "X";
-let turnCount = 0;
-let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+let currentPlayer = "X"; // بازیکن فعلی
+let turnCount = 0; // دور های بازی
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]; // تخته بازی
 const winningConditions = [
-    [0, 1, 2], // First Row
-    [3, 4, 5], // Second Row
-    [6, 7, 8], // Third Row
-    [0, 3, 6], // First Column
-    [1, 4, 7], // Second Column
-    [2, 5, 8], // Third Column
-    [0, 4, 8], // Main Diagonal
-    [2, 4, 6], // Anti-Diagonal
+  // آرایه ای شامل تمام شرایط برد
+  [0, 1, 2], // First Row
+  [3, 4, 5], // Second Row
+  [6, 7, 8], // Third Row
+  [0, 3, 6], // First Column
+  [1, 4, 7], // Second Column
+  [2, 5, 8], // Third Column
+  [0, 4, 8], // Main Diagonal
+  [2, 4, 6], // Anti-Diagonal
 ];
 
 // Current Player Element
 const currentPlayerElement = document.createElement("h2");
 document.getElementById("h1").appendChild(currentPlayerElement);
-currentPlayerElement.id = "current-player"
-currentPlayerElement.textContent ="Current Player: X";
+currentPlayerElement.id = "current-player";
+currentPlayerElement.textContent = "Current Player: X";
 
 // Game Status Function
 function checkGameStatus() {
@@ -35,31 +36,37 @@ function checkGameStatus() {
   const ticTacToe = document.getElementById("h1");
   let roundWon = false;
   for (let i = 0; winningConditions.length > i; i++) {
-    condition = winningConditions[i];
-    const indexA = condition[0];
-    const indexB = condition[1];
-    const indexC = condition[2];
+    condition = winningConditions[i]; // در هر دفعه که حلقه اجرا میشود به ایندکس بعدی از آرایه شرایط بردن وارد متغیر میشود
+    const indexA = condition[0]; // اولین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+    const indexB = condition[1]; // دومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+    const indexC = condition[2]; // سومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
 
-    const boxA = board[indexA];
-    const boxB = board[indexB];
-    const boxC = board[indexC];
+    const boxA = board[indexA]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
+    const boxB = board[indexB]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
+    const boxC = board[indexC]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
 
+    // Winning Conditions Check
     switch (true) {
-      case boxA === " " || boxB === " " || boxC === " ":
+      case boxA === " " || boxB === " " || boxC === " ": // اگر که یکی از ایندکس های مد نظر خالی بود ادامه بده
         continue;
 
-      case boxA === boxB && boxB === boxC:
+      case boxA === boxB && boxB === boxC: // اگر که همه ایندکس ها برار بودن متغیر برد را برابر با درست قرار بده
         roundWon = true;
         break;
     }
   }
+
+  // Won Activity
   if (roundWon) {
+    // اگر متغیر برد درست بود برد را نمایش بده و رویداد کل باکس رو حذف میکند
     ticTacToe.innerText = `${currentPlayer} Won`;
     console.log(board);
     article.removeEventListener("click", onClickBox);
   }
-  // Draw Conditions
+
+  // Draw Activity
   if (turnCount === 9 && roundWon === false) {
+    // اگر در دور نهم بودیم و متغیر برد نادرست بود مساوی را نمایش بده و رویداد کل باکس رو حذف میکند
     ticTacToe.innerText = "Draw";
     article.removeEventListener("click", onClickBox);
   }
@@ -68,36 +75,38 @@ function checkGameStatus() {
 // Box Action
 const article = document.getElementById("article");
 const onClickBox = (e) => {
-  const boxCheck = e.target.closest(".box"); // If .box is exited True else is False
+  const boxCheck = e.target.closest(".box"); // اگر کلس وجود داشته باشد نتیجه درست در متغیر ذخیره میشود در غیر این صورت نادرست
 
   if (boxCheck) {
     const boxId = boxCheck.id;
-    const boxIndex = boxId.replace("box", "") - 1; // Changes the boxIndex by one unit to fix index 0 and push X to board
+    const boxIndex = boxId.replace("box", "") - 1; // برای بدست آوردن ایندکس باکس ها از آی دی آنها کلمه باکس را حذف کرده و از عدد باقی مانده یک واحد کم میکنیم
 
-    if (turnCount % 2 == 0) {
-      // Player Turn
+    if (turnCount % 2 == 0) { // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
+      currentPlayer = "X"; // "تغییر بازیکن فعلی به "ایکس
+      currentPlayerElement.innerText = "Current Player: O"; // "تغییر متن بازیکن فعلی به "ایکس
       turnCount++;
-      currentPlayer = "X";
-      document.getElementById("current-player").innerText = "Current Player: O";
     } else {
-      currentPlayer = "O";
-      document.getElementById("current-player").innerText = "Current Player: X";
+      currentPlayer = "O"; // "تغییر بازیکن فعلی به "او
+      currentPlayerElement.innerText = "Current Player: X"; // "تغییر متن بازیکن فعلی به "او
       turnCount++;
     }
 
-    switch (currentPlayer) {
-      case "X":
-        boxCheck.querySelector(".x-svg").classList.add("show");
-        board[boxIndex] = "X";
+    switch (
+      currentPlayer // بررسی بازیکن فعلی
+    ) {
+      case "X": // اگر بازیکن "ایکس" بود
+        boxCheck.querySelector(".x-svg").classList.add("show"); // به اس وی جی "ایکس" "کلس" اضافه میکند
+        board[boxIndex] = "X"; // ایکس" را در ایندکس باکس کلیک شده در تخته اضافه کن"
         break;
 
-      case "O":
-        boxCheck.querySelector(".o-svg").classList.add("show");
-        board[boxIndex] = "O";
+      case "O": // اگر بازیکن "او" بود
+        boxCheck.querySelector(".o-svg").classList.add("show"); // به اس وی جی "او" "کلس" اضافه میکند
+        board[boxIndex] = "O"; // او" را در ایندکس باکس کلیک شده در تخته اضافه کن"
         break;
     }
     boxCheck.classList = "box-active";
     checkGameStatus();
   }
 };
+
 article.addEventListener("click", onClickBox);
