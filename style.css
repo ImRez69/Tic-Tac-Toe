@@ -51,6 +51,34 @@ body {
   font-size: 18px;
 }
 
+/* #game-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+  transition: 200ms;
+
+}
+
+#click-to-start,
+#draw,
+#x-won,
+#o-won {
+  font-family: var(--vazir-font);
+  font-weight: bold;
+  transition: 200ms;
+  opacity: 0;
+}
+
+#current-player-x,
+#current-player-o {
+  font-family: var(--vazir-font);
+  font-weight: bold;
+  transition: 200ms;
+  display: none;
+} */
+
 .article {
   /* outline: 5px solid white; */
   width: 100%;
