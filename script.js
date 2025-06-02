@@ -2,9 +2,12 @@
 const button = document.getElementById("btn");
 const body = document.getElementById("body");
 const svg = document.querySelectorAll("svg");
+const article = document.getElementById("article");
+
 const onClick = () => {
-  body.classList.toggle("light"); // اضافه کردن کلس به بادی
-  svg.forEach((svg) => svg.classList.toggle("light-svg")); // اضافه کردن کلس به همه اس وی جا ها
+  body.classList.toggle("light"); // "اضافه کردن "کلس" به "بادی
+  article.classList.toggle("light-article") // اضافه کردن "کلس" به "آرتیکل" برای "بردر" "باکس" ها
+  svg.forEach((svg) => svg.classList.toggle("light-svg")); // اضافه کردن "کلس" به همه "اس وی جی" ها
 };
 button.addEventListener("click", onClick);
 
@@ -73,7 +76,6 @@ function checkGameStatus() {
 }
 
 // Box Action
-const article = document.getElementById("article");
 const onClickBox = (e) => {
   const boxCheck = e.target.closest(".box"); // اگر کلس وجود داشته باشد نتیجه درست در متغیر ذخیره میشود در غیر این صورت نادرست
 
