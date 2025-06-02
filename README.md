@@ -1,1 +1,1 @@
-sample Structure of a Tic Tac Toe Game
+Sample Structure of a Tic Tac Toe Game
