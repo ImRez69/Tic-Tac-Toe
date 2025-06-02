@@ -6,8 +6,9 @@ const article = document.getElementById("article");
 
 const onClick = () => {
   body.classList.toggle("light"); // "اضافه کردن "کلس" به "بادی
-  article.classList.toggle("light-article") // اضافه کردن "کلس" به "آرتیکل" برای "بردر" "باکس" ها
+  article.classList.toggle("light-article"); // اضافه کردن "کلس" به "آرتیکل" برای "بردر" "باکس" ها
   svg.forEach((svg) => svg.classList.toggle("light-svg")); // اضافه کردن "کلس" به همه "اس وی جی" ها
+  button.classList.toggle("light-btn");
 };
 button.addEventListener("click", onClick);
 
@@ -27,16 +28,13 @@ const winningConditions = [
   [2, 4, 6], // Anti-Diagonal
 ];
 
-// Current Player Element
-const currentPlayerElement = document.createElement("h2");
-document.getElementById("h1").appendChild(currentPlayerElement);
-currentPlayerElement.id = "current-player";
-currentPlayerElement.textContent = "Current Player: X";
+// currentPlayerElement
+const currentPlayerElement = document.getElementById("current-player");
 
 // Game Status Function
 function checkGameStatus() {
   // Winning Conditions
-  const ticTacToe = document.getElementById("h1");
+  const ticTacToe = document.getElementById("tic-tac-toe");
   let roundWon = false;
   for (let i = 0; winningConditions.length > i; i++) {
     condition = winningConditions[i]; // در هر دفعه که حلقه اجرا میشود به ایندکس بعدی از آرایه شرایط بردن وارد متغیر میشود
@@ -63,7 +61,7 @@ function checkGameStatus() {
   if (roundWon) {
     // اگر متغیر برد درست بود برد را نمایش بده و رویداد کل باکس رو حذف میکند
     ticTacToe.innerText = `${currentPlayer} Won`;
-    console.log(board);
+    currentPlayerElement.style.opacity = "0";
     article.removeEventListener("click", onClickBox);
   }
 
@@ -71,6 +69,7 @@ function checkGameStatus() {
   if (turnCount === 9 && roundWon === false) {
     // اگر در دور نهم بودیم و متغیر برد نادرست بود مساوی را نمایش بده و رویداد کل باکس رو حذف میکند
     ticTacToe.innerText = "Draw";
+    currentPlayerElement.style.display = "none";
     article.removeEventListener("click", onClickBox);
   }
 }
@@ -83,7 +82,8 @@ const onClickBox = (e) => {
     const boxId = boxCheck.id;
     const boxIndex = boxId.replace("box", "") - 1; // برای بدست آوردن ایندکس باکس ها از آی دی آنها کلمه باکس را حذف کرده و از عدد باقی مانده یک واحد کم میکنیم
 
-    if (turnCount % 2 == 0) { // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
+    if (turnCount % 2 == 0) {
+      // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
       currentPlayer = "X"; // "تغییر بازیکن فعلی به "ایکس
       currentPlayerElement.innerText = "Current Player: O"; // "تغییر متن بازیکن فعلی به "ایکس
       turnCount++;
