@@ -44,8 +44,6 @@ function ticTacToe() {
     const currentPlayerDiv = document.getElementById("current-player-div");
 
     if (turnCount >= 5) {
-      console.log("GG");
-
       for (let i = 0; winningConditions.length > i; i++) {
         condition = winningConditions[i]; // در هر دفعه که حلقه اجرا میشود به ایندکس بعدی از آرایه شرایط بردن وارد متغیر میشود
         const indexA = condition[0]; // اولین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
