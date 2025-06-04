@@ -102,8 +102,9 @@ function ticTacToe() {
       const boxIndex = boxId.replace("box", "") - 1; // برای بدست آوردن ایندکس باکس ها از آی دی آنها کلمه باکس را حذف کرده و از عدد باقی مانده یک واحد کم میکنیم
       const currentPlayerX = document.getElementById("current-player-x");
       const currentPlayerO = document.getElementById("current-player-o");
+      let xOrO = turnCount % 2 == 0;
 
-      if (turnCount % 2 == 0) {
+      if (xOrO) {
         // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
         currentPlayer = "X"; // "تغییر بازیکن فعلی به "ایکس
         currentPlayerX.style.transform = "scale(0)";
