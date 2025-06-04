@@ -18,7 +18,7 @@
 body {
   width: 100%;
   height: 500px;
-  transition: 200ms;
+  transition: 300ms;
   color: white;
   background-color: black;
   display: flex;
@@ -29,7 +29,7 @@ body {
 }
 
 .light {
-  transition: 200ms;
+  transition: 300ms;
   color: black;
   background-color: white;
 }
@@ -77,8 +77,52 @@ header {
   text-align: center;
 }
 
+#current-player-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(1);
+  transition: 300ms;
+}
+
+#current-player-div.hide {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0);
+}
+
 #current-player {
   font-size: 18px;
+  transition: 300ms;
+  opacity: 1;
+  transform: scale(1);
+}
+
+#current-player-x {
+  width: 50%;
+  transform: scale(1);
+  transition: 300ms;
+  text-align: center;
+  font-size: 28px;
+  padding: 10px 0px 20px;
+}
+
+#current-player-o {
+  width: 50%;
+  transform: scale(0);
+  transition: 300ms;
+  text-align: center;
+  font-size: 28px;
+  padding: 10px 0px 20px;
+}
+
+.player-x-won {
+  background-color: darkblue;
+}
+
+.player-o-won {
+  background-color: darkred;
 }
 
 .article {
@@ -87,7 +131,7 @@ header {
   margin-bottom: 0px;
   display: flex;
   flex-wrap: wrap;
-  transition: 1000ms;
+  transition: 300ms;
   visibility: hidden;
   opacity: 0;
 }

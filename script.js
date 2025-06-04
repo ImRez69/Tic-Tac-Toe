@@ -20,7 +20,6 @@ function ticTacToe() {
   let turnCount = 0; // دور های بازی
   let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]; // تخته بازی
   let roundWon = false;
-  const currentPlayerElement = document.getElementById("current-player"); // currentPlayerElement
   document.getElementById("article").style.visibility = "visible";
   document.getElementById("article").style.opacity = "1";
   document.getElementById("start-btn").style.display = "none";
@@ -42,25 +41,29 @@ function ticTacToe() {
     // Winning Conditions
     const ticTacToe = document.getElementById("tic-tac-toe");
     const article = document.getElementById("article");
+    const currentPlayerDiv = document.getElementById("current-player-div");
 
-    for (let i = 0; winningConditions.length > i; i++) {
-      condition = winningConditions[i]; // در هر دفعه که حلقه اجرا میشود به ایندکس بعدی از آرایه شرایط بردن وارد متغیر میشود
-      const indexA = condition[0]; // اولین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
-      const indexB = condition[1]; // دومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
-      const indexC = condition[2]; // سومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+    if (turnCount >= 5) {
+      console.log("GG");
 
-      const boxA = board[indexA]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
-      const boxB = board[indexB]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
-      const boxC = board[indexC]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
+      for (let i = 0; winningConditions.length > i; i++) {
+        condition = winningConditions[i]; // در هر دفعه که حلقه اجرا میشود به ایندکس بعدی از آرایه شرایط بردن وارد متغیر میشود
+        const indexA = condition[0]; // اولین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+        const indexB = condition[1]; // دومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+        const indexC = condition[2]; // سومین ایندکس شرایط بردن رو درون متغیری دیپر ذخیره میکند
+        const boxA = board[indexA]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
+        const boxB = board[indexB]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
+        const boxC = board[indexC]; // محتویات ایندکس مد نطر که از شرایط بردن برداشتیم را از تخته بازی در متغیری جهت بررسی یکی بودن ذخیره میکنیم
 
-      // Winning Conditions Check
-      switch (true) {
-        case boxA === " " || boxB === " " || boxC === " ": // اگر که یکی از ایندکس های مد نظر خالی بود ادامه بده
-          continue;
+        // Winning Conditions Check
+        switch (true) {
+          case boxA === " " || boxB === " " || boxC === " ": // اگر که یکی از ایندکس های مد نظر خالی بود ادامه بده
+            continue;
 
-        case boxA === boxB && boxB === boxC: // اگر که همه ایندکس ها برار بودن متغیر برد را برابر با درست قرار بده
-          roundWon = true;
-          break;
+          case boxA === boxB && boxB === boxC: // اگر که همه ایندکس ها برار بودن متغیر برد را برابر با درست قرار بده
+            roundWon = true;
+            break;
+        }
       }
     }
 
@@ -68,15 +71,26 @@ function ticTacToe() {
     if (roundWon) {
       // اگر متغیر برد درست بود برد را نمایش بده و رویداد کل باکس رو حذف میکند
       ticTacToe.innerText = `${currentPlayer} Won`;
-      currentPlayerElement.style.opacity = "0";
+      currentPlayerDiv.classList.add("hide");
       article.removeEventListener("click", onClickBox);
+
+      // تغییر رنگ بک گراند به رنگ برنده
+      switch (true) {
+        case currentPlayer === "X":
+          body = document.getElementById("body").classList.add("player-x-won");
+          break;
+
+        case currentPlayer === "O":
+          body = document.getElementById("body").classList.add("player-o-won");
+          break;
+      }
     }
 
     // Draw Activity
     if (turnCount === 9 && roundWon === false) {
       // اگر در دور نهم بودیم و متغیر برد نادرست بود مساوی را نمایش بده و رویداد کل باکس رو حذف میکند
       ticTacToe.innerText = "Draw";
-      currentPlayerElement.style.display = "none";
+      currentPlayerDiv.style.transform = "scale(0)";
       article.removeEventListener("click", onClickBox);
     }
   }
@@ -88,15 +102,21 @@ function ticTacToe() {
     if (boxCheck) {
       const boxId = boxCheck.id;
       const boxIndex = boxId.replace("box", "") - 1; // برای بدست آوردن ایندکس باکس ها از آی دی آنها کلمه باکس را حذف کرده و از عدد باقی مانده یک واحد کم میکنیم
+      const currentPlayerX = document.getElementById("current-player-x");
+      const currentPlayerO = document.getElementById("current-player-o");
 
       if (turnCount % 2 == 0) {
         // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
         currentPlayer = "X"; // "تغییر بازیکن فعلی به "ایکس
-        currentPlayerElement.innerText = "Current Player: O"; // "تغییر متن بازیکن فعلی به "ایکس
+        currentPlayerX.style.transform = "scale(0)";
+        currentPlayerO.style.transform = "scale(1)";
+
         turnCount++;
       } else {
         currentPlayer = "O"; // "تغییر بازیکن فعلی به "او
-        currentPlayerElement.innerText = "Current Player: X"; // "تغییر متن بازیکن فعلی به "او
+        currentPlayerX.style.transform = "scale(1)";
+        currentPlayerO.style.transform = "scale(0)";
+
         turnCount++;
       }
 
@@ -120,4 +140,6 @@ function ticTacToe() {
 
   document.getElementById("article").addEventListener("click", onClickBox);
 }
-document.getElementById("start-btn").addEventListener("click", ticTacToe);
+document
+  .getElementById("start-btn")
+  .addEventListener("click", ticTacToe, { once: true });
