@@ -115,19 +115,18 @@ function ticTacToe() {
         currentPlayer = "O"; // "تغییر بازیکن فعلی به "او
         currentPlayerX.style.transform = "scale(1)";
         currentPlayerO.style.transform = "scale(0)";
-
         turnCount++;
       }
 
       // بررسی بازیکن فعلی
       switch (currentPlayer) {
         case "X": // اگر بازیکن "ایکس" بود
-          boxCheck.querySelector(".x-svg").classList.add("show"); // به اس وی جی "ایکس" "کلس" اضافه میکند
+          boxCheck.querySelector(".x-svg").classList.replace("hide","show"); // به اس وی جی "ایکس" "کلس" اضافه میکند
           board[boxIndex] = "X"; // ایکس" را در ایندکس باکس کلیک شده در تخته اضافه کن"
           break;
 
         case "O": // اگر بازیکن "او" بود
-          boxCheck.querySelector(".o-svg").classList.add("show"); // به اس وی جی "او" "کلس" اضافه میکند
+          boxCheck.querySelector(".o-svg").classList.replace("hide","show"); // به اس وی جی "او" "کلس" اضافه میکند
           board[boxIndex] = "O"; // او" را در ایندکس باکس کلیک شده در تخته اضافه کن"
           break;
       }
