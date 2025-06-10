@@ -52,7 +52,8 @@ header {
 }
 
 #btn,
-#start-btn {
+#start-btn,
+#restart-btn {
   margin: 16px auto;
   border-radius: 8px;
   border: none;
@@ -64,6 +65,11 @@ header {
 
 #start-btn {
   width: 40%;
+}
+
+#restart-btn{
+  display: none;
+  padding: 0 8px;
 }
 
 .light-btn {
