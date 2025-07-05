@@ -144,6 +144,4 @@ function ticTacToe() {
 
   document.getElementById("article").addEventListener("click", onClickBox);
 }
-document
-  .getElementById("start-btn")
-  .addEventListener("click", ticTacToe, { once: true });
+document.getElementById("start-btn").addEventListener("click", ticTacToe, { once: true });
