@@ -13,7 +13,7 @@ const onClick = () => {
   startButton.classList.toggle("light-btn");
   restartButton.classList.toggle("light-btn");
 };
-document.getElementById("btn").addEventListener("click", onClick);
+document.getElementById("theme-btn").addEventListener("click", onClick);
 
 // Tic Tac Toe Game
 function ticTacToe() {
@@ -96,6 +96,9 @@ function ticTacToe() {
       ticTacToe.innerText = "Draw";
       currentPlayerDiv.style.transform = "scale(0)";
       article.removeEventListener("click", onClickBox);
+      const restart = () => location.reload();
+      document.getElementById("restart-btn").style.display = "block";
+      document.getElementById("restart-btn").addEventListener("click", restart);
     }
   }
 
@@ -108,9 +111,9 @@ function ticTacToe() {
       const boxIndex = boxId.replace("box", "") - 1; // برای بدست آوردن ایندکس باکس ها از آی دی آنها کلمه باکس را حذف کرده و از عدد باقی مانده یک واحد کم میکنیم
       const currentPlayerX = document.getElementById("current-player-x");
       const currentPlayerO = document.getElementById("current-player-o");
-      let xOrO = turnCount % 2 == 0;
+      let turn = turnCount % 2 == 0;
 
-      if (xOrO) {
+      if (turn) {
         // "اگر در دور زوج بودیم نوبت بازیکن "ایکس" و در غیر اینصورت نوبت بازیکن "او
         currentPlayer = "X"; // "تغییر بازیکن فعلی به "ایکس
         currentPlayerX.style.transform = "scale(0)";
@@ -144,4 +147,6 @@ function ticTacToe() {
 
   document.getElementById("article").addEventListener("click", onClickBox);
 }
-document.getElementById("start-btn").addEventListener("click", ticTacToe, { once: true });
+document
+  .getElementById("start-btn")
+  .addEventListener("click", ticTacToe, { once: true });

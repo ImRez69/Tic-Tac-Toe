@@ -15,7 +15,7 @@
   font-family: Poppins;
   transition: 300ms;
 }
-
+/* سیشی */
 body {
   width: 100%;
   height: 500px;
@@ -51,7 +51,7 @@ header {
   height: 300px;
 }
 
-#btn,
+#theme-btn,
 #start-btn,
 #restart-btn {
   margin: 16px auto;
@@ -59,7 +59,7 @@ header {
   border: none;
 }
 
-#btn {
+#theme-btn {
   width: 20%;
 }
 
@@ -67,7 +67,7 @@ header {
   width: 40%;
 }
 
-#restart-btn{
+#restart-btn {
   display: none;
   padding: 0 8px;
 }
@@ -157,19 +157,19 @@ header {
 }
 
 .hide {
+  height: 0;
+  width: 0;
   visibility: hidden;
   opacity: 0;
-  transform: scale(0);
   transition: 300ms;
-  display: none;
 }
 
 .show {
   visibility: visible;
   opacity: 1;
-  transform: scale(1);
   transition: 300ms;
-  display: block;
+  height: 70%;
+  width: 70%;
 }
 
 .light-svg {
