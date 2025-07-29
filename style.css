@@ -1,7 +1,7 @@
 @font-face {
   font-family: Poppins;
   src: local("Poppins-Regular"),
-    url(./Font/Poppins-Regular.ttf) format(truetype);
+    url(./Source/Font/Poppins-Regular.ttf) format(truetype);
 }
 
 :root {
